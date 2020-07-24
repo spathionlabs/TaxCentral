@@ -1,0 +1,396 @@
+﻿@model Main.Mvc.DBModels.TaxInvoice.CreateTaxInvoice
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutSellerDashboard.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Enquiry-signup</title>
+    <!-- Bootstrap core CSS-->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="~/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="~/assets/css/admin.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="card">
+            <div class="card-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>Create Tax Invoice</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-label-group">
+                                        <input type="text" id="DateIssue" class="form-control" required="required" autofocus="autofocus" name="DateIssue" maxlength="60" value=@Model.DateIssue readonly>
+                                        <label for="DateIssue">Invoice Date</label>
+                                    </div>
+
+                                    <div class="form-label-group">
+                                        <input type="text" id="SerialNumber" class="form-control" required="required" autofocus="autofocus" name="SerialNumber" maxlength="60" value=@Model.SerialNumber readonly>
+                                        <label for="SerialNumber">Invoice Number</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="text" id="NameOfSeller" class="form-control" required="required" autofocus="autofocus" name="NameOfSeller" maxlength="60" value=@Model.NameoFSeller readonly>
+                                        <label for="NameOfSeller">Name Of Seller</label>
+                                    </div>
+
+                                    <div class="form-label-group">
+                                        <input type="text" id="GSTIdSeller" class="form-control" required="required" autofocus="autofocus" name="GSTIdSeller" maxlength="60" value=@Model.GSTIDSeller readonly>
+                                        <label for="GSTIdSeller">GST Id Seller</label>
+                                    </div>
+                                </div>
+                                <div id="AddressSeller"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-label-group">
+                                        <input type="text" id="PONO" class="form-control" required="required" autofocus="autofocus" name="PONO" maxlength="60">
+                                        <label for="PONO">PO No</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="text" id="NameBuyer" class="form-control" required="required" autofocus="autofocus" name="NameBuyer" maxlength="60">
+                                        <label for="NameBuyer">Name Of Buyer</label>
+                                    </div>
+
+                                    <div class="form-label-group">
+                                        <input type="text" id="GSTIDBuyer" class="form-control" required="required" autofocus="autofocus" name="GSTIDBuyer" maxlength="60">
+                                        <label for="GSTIDBuyer">GST ID of Buyer</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="email" id="emailBuyer" class="form-control" required="required" autofocus="autofocus" name="emailBuyer" maxlength="60">
+                                        <label for="emailBuyer">Email Buyer</label>
+                                    </div>
+                                    <div id="ErrorEmail"></div>
+                                    <div class="form-label-group">
+                                        <input type="text" id="RegisteredMobileNoBuyer" class="form-control" required="required" autofocus="autofocus" name="RegisteredMobileNoBuyer" maxlength="60">
+                                        <label for="RegisteredMobileNoBuyer">Buyers Mobile Number</label>
+                                    </div>
+                                    <div id="AddressBuyer"></div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                                <div class="form-label-group">
+                                    <input type="text" id="AddressSeller" class="form-control" required="required" autofocus="autofocus" name="AddressSeller" maxlength="60" readonly>
+                                    <label for="GSTIdSeller">GST Id Seller</label>
+                                </div>
+                            </div>*@
+                        <div class="card">
+                            <div class="card-header">Add Item Details*</div>
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            Product
+                                            <input class="form-control" id="Product" min="1" placeholder="#Product Name">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            GST
+                                            <input class="form-control" id="GST" name="desc" rows="3" placeholder="GST*" onkeydown="return digitsOnly(event);" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            Quantity
+                                            <input class="form-control" id="Quantity" name="desc" rows="3" placeholder="Quantity*" onkeydown="return digitsOnly(event);" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            Rate
+                                            <input class="form-control" id="Rate" name="desc" rows="3" placeholder="Rate*" onkeydown="return digitsOnly(event);" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            Amount
+                                            <input class="form-control" id="Amount" name="desc" rows="3" onkeydown="return digitsOnly(event);" readonly />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+
+
+                                        <div class="col-md-2">
+                                            <button class=" btn-info btn-sm " id="AddItem"> <i class="fa fa-plus">Line Item</i>  </button>
+                                            @*<button id="AddItem" class=" "btn btn-info btn-sm">Line Item </button>*@
+                                        </div>
+                                    </div>
+                                    <div id="err"></div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="table-responsive-sm">
+                            <table id="POItemTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Product</th>
+                                        <th class="center">GST</th>
+                                        @*<th>Item</th>*@
+                                        <th>Quantity</th>
+                                        @*<th class="center">Quantity</th>*@
+                                        <th class="center">Rate</th>
+                                        <th>Amount</th>
+                                        @*<th >Unit Cost</th>*@
+                                        @*<th >Total</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+
+                            <div class="offset-md-6" id="Total"></div>
+                            <div id="GSTAmount"></div>
+                        </div>
+                        <div class="offset-md-8"><input type="submit" class=" btn-info btn-sm " id="issuebutton" value="Create Invoice" /></div>
+
+                        <input type="hidden" id="itemarray" name="itemarray" />
+                        <input type="hidden" id="TotalAmountHidden" name="TotalAmountHidden" />
+                        <input type="hidden" id="GSTAmountHidden" name="GSTAmountHidden" />
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<style>
+    .error-msg {
+        color: #FF0000;
+    }
+</style>
+<script>
+    var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png", ".pdf"];
+    function UploadDocumentsCheck(oInput) {
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+            if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < _validFileExtensions.length; j++) {
+                    var sCurExtension = _validFileExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                        blnValid = true;
+                        break;
+                    }
+                }
+
+                if (!blnValid) {
+                    alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                    oInput.value = "";
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    function digitsOnly() {
+        var key = event.keyCode;
+        return ((key >= 48 && key <= 57) || key == 8 || key == 9);
+    }
+</script>
+<script>
+    var count = 1;
+    $("#emailBuyer").blur(function () {
+        debugger;
+        $("#ErrorEmail").hide();
+        $("#ErrorEmail").html("").addClass("error-msg");
+        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if (!pattern.test($("#emailBuyer").val())) {
+            $("#ErrorEmail").show();
+            $("#ErrorEmail").html("Invalid Email").addClass("error-msg");
+            $("#emailBuyer").focus();
+        }
+
+    });
+    $('#Rate').keydown(function (e) {
+        var code = e.keyCode || e.which;
+
+        if (code === 9) {//
+            // $('#Rate').tab(function () {
+            debugger;
+            var sum = parseInt($('#Rate').val()) * parseInt($('#Quantity').val());
+            $('#Amount').val(sum);//= parseInt($('#Rate').val()) * parseInt($('#Quantity').val());
+        }
+    })
+    $('#AddItem').click(function () {
+        var isvalid = true;
+        var errMessage = "";
+        if ($('#GST').val().length == 0 || !$.isNumeric($('#GST').val())) {
+            isvalid = false;
+            errMessage = "Enter Gst Amount";
+
+        }
+        if ($('#Quantity').val().length == 0 || !$.isNumeric($('#Quantity').val())) {
+            isvalid = false;
+            if (errMessage.length > 0)
+                errMessage += ",";
+            errMessage += "Enter Quantity";
+
+        }
+        if ($('#Rate').val().length == 0 || !$.isNumeric($('#Rate').val())) {
+            isvalid = false;
+
+            if (errMessage.length > 0)
+                errMessage += ",";
+            errMessage += "Enter Rate";
+
+        }
+        //if ($('#Amount').val().length == 0 || !$.isNumeric($('#Amount').val())) {
+        //    isvalid = false;
+        //    if (errMessage.length > 0)
+        //        errMessage += ",";
+        //    errMessage += "Enter Amount";
+
+        //}
+        if (!isvalid) {
+            $("#err").html(errMessage);
+        }
+        else {
+             $("#err").html("");
+
+            if ($('#Amount').val().length == 0) {
+                var sum = parseInt($('#Rate').val()) * parseInt($('#Quantity').val());
+                $('#Amount').val(sum);//= parseInt($('#Rate').val()) * parseInt($('#Quantity').val());
+
+            }
+
+            $('#POItemTable tbody').append(
+                //  $('#POItemTable').append(
+                '<tr id ="row' + count + '">' +
+
+                //'<td><a class="btn-ctm btn-sm"><i class="fa fa-minus  btn-primary btn_remove" id="' + count + '"></i> </a></td>' +
+                //'<td>  <button class="btn btn-info btn-sm btn_remove" id="' + count + '">Remove </button></td>' +
+                '<td><button  class="btn-info btn-sm btn_remove" id="' + count + '"><i class="fa fa-minus" >Line Item</i> </button></td>' +
+                ' <td class="center">' + $('#Product').val() + '</td>' +
+                // '<td class="left">' + $('#ItemName').val() + '</td>' +
+                '<td class="left">' + $('#GST').val() + '</td>' +
+                // '<td class="center">' + $('#Quantity').val() + '</td>' +
+                '<td class="right">' + $('#Quantity').val() + '</td>' +
+                '<td class="right">' + $('#Rate').val() + '</td>' +
+                '<td class="right">' + $('#Amount').val() + '</td>' +
+                //  '<td class="right">' + $('#UnitCost').val() + '</td>' +
+                //'<td class=\"right\">'+ '</td>' +
+                '</tr>'
+            )
+            count++;
+            debugger;
+            $('#Product').val("");
+            $('#GST').val("");
+            $('#Quantity').val("");
+            $('#Rate').val("");
+            $('#Amount').val("");
+            var total = 0;
+            var totalgst = 0.0;
+            $('#POItemTable tr').each(function () {
+                if (!this.rowIndex) return;
+                total += parseInt(this.cells[5].innerHTML);
+                totalgst += parseInt(this.cells[5].innerHTML) * parseInt(this.cells[2].innerHTML);
+            });
+            var totalgstAmount = totalgst / 100;
+            $('#Total').html("<strong>Total=" + total + "</strong>,");
+            $('#GSTAmount').html("<strong>Total GST=" + totalgstAmount + "</strong>");
+            $('#TotalAmountHidden').val(total);
+            $('#GSTAmountHidden').val(totalgstAmount);
+
+
+            var items = [];
+            $('#POItemTable tr').each(function () {
+                if (!this.rowIndex) return;// skip first row
+                items.push(this.cells[1].innerHTML);
+                items.push(this.cells[2].innerHTML);
+                items.push(this.cells[3].innerHTML);
+                items.push(this.cells[4].innerHTML);
+                items.push(this.cells[5].innerHTML);
+            });
+            $('#itemarray').val(JSON.stringify(items));
+            event.preventDefault();
+        }
+    })
+
+    $(document).on('click', '.btn_remove', function () {
+        //debugger;
+        var button_id = $(this).attr("id");
+        $("#row" + button_id + "").remove();
+        event.preventDefault();
+        var total = 0;
+        var totalgst = 0.0;
+        $('#POItemTable tr').each(function () {
+            if (!this.rowIndex) return;
+            total += parseInt(this.cells[5].innerHTML);
+            totalgst += parseInt(this.cells[5].innerHTML) * parseInt(this.cells[2].innerHTML);
+        });
+        var totalgstAmount = totalgst / 100;
+        $('#Total').html("<strong>Total=" + total + "</strong>,");
+        $('#GSTAmount').html("<strong>Total GST=" + totalgstAmount + "</strong>");
+        $('#TotalAmountHidden').val(total);
+        $('#GSTAmountHidden').val(totalgstAmount);
+        var items = [];
+        debugger;
+        $('#POItemTable tr').each(function () {
+            if (!this.rowIndex) return;// skip first row
+            items.push(this.cells[1].innerHTML);
+            items.push(this.cells[2].innerHTML);
+            items.push(this.cells[3].innerHTML);
+            items.push(this.cells[4].innerHTML);
+            items.push(this.cells[5].innerHTML);
+        });
+        $('#itemarray').val(JSON.stringify(items));
+        event.preventDefault();
+    })
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+    $(document).ready(function () {
+        var fullDate = new Date();
+        var date = fullDate.getDate() + "/" + fullDate.getMonth() + "/" + fullDate.getFullYear();
+        debugger;
+       // $('#DateIssue').val(date);
+       // $('#SerialNumber').val(uuidv4());
+       // $('#NameOfSeller').val("Seller Test");
+       // $('#GSTIdSeller').val("12344GstSellerId");
+
+
+    });
+</script>

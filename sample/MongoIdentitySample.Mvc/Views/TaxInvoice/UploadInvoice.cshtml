@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "UploadInvoice";
+    Layout = "~/Views/Shared/_LayoutSellerDashboard.cshtml";
+}
+
+<style>
+    .center {
+        margin: auto;
+        width: 30%;
+        border: 3px solid #73AD21;
+        padding: 10px;
+    }
+</style>
+<form action="UploadInvoice"
+      enctype="multipart/form-data"
+      method="post">
+
+    <div class="container">
+        <div class="center">
+            <h4 class="card-title">Upload  File</h4>
+
+            <dl>
+                <dt>
+                    <label for="FileUpload_FormFile">File</label>
+                </dt>
+                <dd>
+                    <input id="FileUpload_FormFile" type="file"
+                           name="file" accept="application/json" />
+                </dd>
+            </dl>
+            <br />
+            Email :<input type="email" name="toemail" />
+            <br /><br />
+            <input class="btn badge-dark" type="submit" value="Upload" />
+
+            <div style="margin-top:15px">
+                <output name="result"></output>
+            </div>
+
+        </div>
+    </div>
+</form>

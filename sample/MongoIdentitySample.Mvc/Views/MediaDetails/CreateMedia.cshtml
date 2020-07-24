@@ -1,0 +1,540 @@
+﻿@model Main.Mvc.DBModels.MediaDetails
+
+@{
+    ViewData["Title"] = "InsertMedia";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h1>InsertMedia</h1>
+
+<h4>MediaDetails</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @*<form asp-action="InsertMedia">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="youtubeURL" class="control-label"></label>
+                <input asp-for="youtubeURL" class="form-control" />
+                <span asp-validation-for="youtubeURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageURL" class="control-label"></label>
+                <input asp-for="ImageURL" class="form-control" />
+                <span asp-validation-for="ImageURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileUploadedPath" class="control-label"></label>
+                <input asp-for="FileUploadedPath" class="form-control" />
+                <span asp-validation-for="FileUploadedPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadType" class="control-label"></label>
+                <input asp-for="UploadType" class="form-control" />
+                <span asp-validation-for="UploadType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedOn" class="control-label"></label>
+                <input asp-for="CreatedOn" class="form-control" />
+                <span asp-validation-for="CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>*@
+    </div>
+</div>
+
+@{
+    ViewBag.Title = "Create Media Details";
+
+    /// Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@*<link href="~/Content/Bootsnip.css" rel="stylesheet" />*@
+<style>
+    .error-msg {
+        color: #FF0000;
+    }
+
+    .success-msg {
+        color: #0d074e;
+    }
+</style>
+<!-- Bootstrap core CSS-->
+<link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link href="~/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<!-- Custom styles for this template-->
+<link href="~/assets/css/admin.css" rel="stylesheet">
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>*@
+@*<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
+<!------ Include the above in your HEAD tag ---------->
+
+<div id="content-wrapper">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header text-center">
+                Create Media Details
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-3">
+                        <div class="panel panel-login">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    @*<div class="col-xs-2 col-md-2">
+                                            <a href="#" class="active" id="Trader-form-Regulator"><b>Trader</b></a>
+                                        </div>*@
+                                    <div class="col-xs-4 col-md-4">
+                                        <a href="#" class="active" id="Youtube-form-link"><b> Youtube Link</b></a>
+                                    </div>
+                                    <div class="col-xs-4 col-md-4">
+                                        <a href="#" id="ImageLink-form-link"><b>Image Link</b></a>
+                                    </div>
+                                    @*<div class="col-xs-2 col-md-2">
+                                            <a href="#" id="ImageLink-form-link"><b>Indvidual Investor</b></a>
+                                        </div>
+                                        <div class="col-xs-2 col-md-2">
+                                            <a href="#" id="institutional-ImageLink-form-link"><b>Institutional Investor</b></a>
+                                        </div>*@
+                                    <div class="col-xs-4 col-md-4">
+                                        <a href="#" id="UploadImage-form-link"><b>Upload Image</b></a>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        @*<form id="Trader-form" action="Traderemail" method="post" role="form" style="display: block; >
+            <div class="form-group col-sm-10 col-sm-offset-2">
+                <input type="email" name="mobile" id="email" tabindex="1" class="form-control" placeholder="Trader Mobile Number" value="" width="12">
+            </div>
+
+            <input type="submit" name="register-submit" id="register-submit-Trader" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+
+        </form>*@
+                                        <form id="YouTube-form" method="post" role="form" style="display: block;">
+
+                                            <div class="form-group col-sm-10 col-sm-offset-2">
+                                                <input type="email" name="email" id="YouTubeURL" tabindex="1" class="form-control" placeholder="Enter Youtube URL" value="" width="12">
+                                            </div>
+                                            @*<div class="form-group col-sm-10 col-sm-offset-2">
+                <select id="TaxProfessionalList" class="form-control"><option value="0">--Select Trader--</option></select>
+            </div>*@
+                                            <input type="submit" name="register-submit" id="register-submit-Youtube" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+                                            @*<div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="register-submit" id="register-submit-Youtube" tabindex="4" class="btn btn-success" value="Send Invite">
+                    </div>
+                </div>
+            </div>*@
+                                        </form>
+                                        <form id="ImageURL-form" action="ImageURL" method="post" role="form" style="display: none;">
+
+                                            <div class="form-group col-sm-10 col-sm-offset-2">
+                                                <input type="text" name="email" id="ImageURLid" tabindex="1" class="form-control" placeholder="ENter Image URL" value="" width="12">
+                                            </div>
+                                            <input type="submit" name="register-submit" id="register-submit-ImageURL" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+                                            @*<div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="register-submit" id="register-submit-ImageURL" tabindex="4" class="btn btn-success" value="Send Invite">
+                    </div>
+                </div>
+            </div>*@
+                                        </form>
+                                        <form id="institutional-ImageURL-form" action="institutionalImageURL" method="post" role="form" style="display: none;">
+
+                                            <div class="form-group col-sm-10 col-sm-offset-2">
+                                                <input type="number" name="email" id="institutionalImageURL" tabindex="1" class="form-control" placeholder="Enter Image URL" value="" width="12">
+                                            </div>
+                                            <input type="submit" name="register-submit" id="register-submit-institutional-investor" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+
+                                        </form>
+                                        @*<form id="ImageUpload-form" action="ImageUploadFile" method="post" role="form" style="display: none;">
+
+            <div class="form-group col-sm-10 col-sm-offset-2">
+                <input type="email" name="email" id="ImageUploadid" tabindex="1" class="form-control" placeholder="Upload Image" value="" maxlength="12">
+            </div>
+            <input type="submit" name="register-submit" id="register-submit-ImageUpload" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+
+        </form>*@
+                                        <form method="post" id="ImageUpload-form" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Index"  style="display: none;">
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <p>Upload one or more files using this form:</p>
+                                                    <input type="file" name="files" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    <input type="submit" value="Upload" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="errMsg" align="center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+   
+        $('#Youtube-form-link').click(function (e) {
+            $("#YouTube-form").delay(100).fadeIn(100);
+            // $("#YouTube-form").fadeOut(100);
+
+            $("#ImageURL-form").fadeOut(100);
+            $("#ImageUpload-form").fadeOut(100);
+            $("#institutional-ImageURL-form").fadeOut(100);
+            $(this).addClass('active');
+            //$.ajax({
+            //    type: "POST",
+            //    contentType: "application/json; charset=utf-8",
+            //    url: "/Loggin/GetAllTraders",
+
+            //    success: function (res) {
+            //        debugger;
+            //        $.each(res, function (data, value) {
+
+            //            $("#TaxProfessionalList").append($("<option></option>").val(value.Id).html(value.Email));
+            //        })
+
+            //    },
+            //    error: function (xhr, err) {
+            //        debugger;
+            //        alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+            //        // alert("responseText: " + xhr.responseText);
+            //    }
+            //});
+
+            //$('#Youtube-form-link').removeClass('active');
+            $('#UploadImage-form-link').removeClass('active');
+            $('#ImageLink-form-link').removeClass('active');
+            $('#institutional-ImageLink-form-link').removeClass('active');
+            e.preventDefault();
+        });
+        $('#ImageLink-form-link').click(function (e) {
+            $("#ImageURL-form").delay(100).fadeIn(100);
+            $("#YouTube-form").fadeOut(100);
+
+            $("#institutional-ImageURL-form").fadeOut(100);
+            //$("#ImageURL-form").fadeOut(100);
+            $("#ImageUpload-form").fadeOut(100);
+            $(this).addClass('active');
+
+            $('#Youtube-form-link').removeClass('active');
+            $('#UploadImage-form-link').removeClass('active');
+            $('#ImageLink-form-link').removeClass('active');
+            $('#institutional-ImageLink-form-link').removeClass('active');
+
+            e.preventDefault();
+        });
+
+        $('#UploadImage-form-link').click(function (e) {
+            $("#ImageUpload-form").delay(100).fadeIn(100);
+            $("#YouTube-form").fadeOut(100);
+            $("#Trader-form").fadeOut(100);
+            $("#ImageURL-form").fadeOut(100);
+            $("#institutional-ImageURL-form").fadeOut(100);
+            //  $("#ImageUpload-form").fadeOut(100);
+            $(this).addClass('active');
+            $('#Trader-form-Regulator').removeClass('active');
+            $('#Youtube-form-link').removeClass('active');
+            //  $('#UploadImage-form-link').removeClass('active');
+            $('#ImageLink-form-link').removeClass('active');
+            $('#institutional-ImageLink-form-link').removeClass('active');
+            e.preventDefault();
+        });
+
+        $("#institutional-ImageLink-form-link").click(function (e) {
+
+            $("#institutional-ImageURL-form").delay(100).fadeIn(100);
+            $("#ImageUpload-form").fadeOut(100);
+            $("#YouTube-form").fadeOut(100);
+
+            $("#ImageURL-form").fadeOut(100);
+            //$("#institutional-ImageURL-form").fadeOut(100);
+            //  $("#ImageUpload-form").fadeOut(100);
+            $(this).addClass('active');
+
+            $('#Youtube-form-link').removeClass('active');
+            //  $('#UploadImage-form-link').removeClass('active');
+            $('#ImageLink-form-link').removeClass('active');
+            //$('#institutional-ImageLink-form-link').removeClass('active');
+            e.preventDefault();
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.noConflict();
+         $('#UploadImage-form-link').removeClass('active');
+        
+        //$('#mobile').keypress(function () {
+        //    if ($("#mobile").val().length > 11)
+        //        event.preventDefault();
+        //});
+        //$('#TaxProfessionalMobile').keypress(function () {
+        //     if ($("#TaxProfessionalMobile").val().length > 11)
+        //        event.preventDefault();
+        // });
+        //$('#ImageUploadid').keypress(function () {
+        //     if ($("#ImageUploadid").val().length > 11)
+        //        event.preventDefault();
+        //});
+        //  $('#Adminusertable').dataTable();
+        // $("#errMsg").html("");
+        //alert("The paragraph was clicked.");
+        $("#register-submit-Trader").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#email").val().length == 0) {
+                message += "*Please Enter Mobile Number *";
+                success = false;
+            }
+            //else {
+            //    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            //    if (!pattern.test($("#email").val())) {
+            //        message += "*Invalid Email *";
+            //        success = false;
+            //    }
+            //}
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+
+            }
+            else {
+                var data = "url=" + $("#email").val() + "&type=0";
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/mediadetails/createmediaurl?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                        $("#errMsg").show().delay(10000).fadeOut();
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+        $("#register-submit-ImageUpload").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#ImageUploadid").val().length == 0) {
+                message += "*Please Upload Image *";
+                success = false;
+            }
+            //else {
+            //    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            //    if (!pattern.test($("#ImageUploadid").val())) {
+            //        message += "*Invalid Email *";
+            //        success = false;
+            //    }
+            //}
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "url=" + $("#ImageUploadid").val() + "&type=2";
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                   // url: "/Registration/UserCreation?" + data,
+                    url: "/mediadetails/createmediaurl?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                        $("#errMsg").show().delay(10000).fadeOut();
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+        $("#register-submit-Youtube").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            //if ($('#TaxProfessionalList :selected').val() == "0") {
+            //    message += "*Please Select Trader *";
+            //    success = false;
+            //}
+            if ($("#YouTubeURL").val().length == 0) {
+                message += "*Please Enter Youtube URL *";
+                success = false;
+            }
+            //else {
+            //    var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            //    if (!pattern.test($("#YouTubeURL").val())) {
+            //        message += "*Invalid Email *";
+            //        success = false;
+            //    }
+            //}
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "url=" + $("#YouTubeURL").val() + "&type=0";
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                   // url: "/Registration/UserCreation?" + data,
+                    url: "/mediadetails/createmediaurl?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                        $("#errMsg").show().delay(10000).fadeOut();
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+
+
+        $("#register-submit-ImageURL").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#ImageURLid").val().length == 0) {
+                message += "*Please Enter Image URL*";
+                success = false;
+            }
+            else {
+                //var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                //if (!pattern.test($("#ImageURL").val())) {
+                //    message += "*Invalid Email *";
+                //    success = false;
+                //}
+            }
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "url=" + $("#ImageURLid").val()+ "&type=1";
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/mediadetails/createmediaurl?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+
+        $("#register-submit-institutional-investor").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#institutionalImageURL").val().length == 0) {
+                message += "*Please Enter Mobile Number *";
+                success = false;
+            }
+            else {
+                //var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                //if (!pattern.test($("#institutionalImageURL").val())) {
+                //    message += "*Invalid Email *";
+                //    success = false;
+                //}
+            }
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "mobile=" + $("#institutionalImageURL").val();
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/Loggin/InstitutionalImageURL?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+    });
+
+</script>
+
+
+
+
+
+
+

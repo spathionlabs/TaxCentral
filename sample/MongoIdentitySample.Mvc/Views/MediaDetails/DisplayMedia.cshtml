@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Main.Mvc.DBModels.DisplayMedia>
+@using Microsoft.AspNetCore.Identity
+@using MongoIdentitySample.Mvc.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+@{
+    Layout = "/Views/Shared/_LayoutHome.cshtml";
+    ViewBag.Title = "Home Page";
+}
+<style>
+    body {
+        background-color: black;
+    }
+</style>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+<div class="row">
+    <div class="col-md-1">
+        <ul>
+            <li>Saved</li>
+            <li>Groups</li>
+            <li>Videos</li>
+
+        </ul>
+    </div>
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-4">
+        @foreach (var item in Model)
+        {
+            @if (item.UploadType == 0)
+            {
+                <div>
+                    <iframe width="420" height="315"
+                            @*src="https://www.youtube.com/embed/tgbNymZ7vqY?controls=0"*@
+                            src=@item.youtubeURL>
+                    </iframe>
+                </div>
+            }
+            @if (item.UploadType == 1)
+            {
+                <div>
+
+                    <img @*src="https://www.w3schools.com/w3css/img_lights.jpg"*@
+                         src=@item.ImageURL
+                         alt="Lights" class="w3-image" width="420" height="315">
+                </div>
+            }
+            @if (item.UploadType == 2)
+            {
+                <div>
+                    <img @*src="https://www.w3schools.com/w3css/img_lights.jpg"*@
+                         src=@item.FileUploadedPath
+                         alt="Lights" class="w3-image" width="420" height="315">
+                </div>
+            }
+
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1">
+                            @if (!item.TipSaved)
+                            {
+                                <button id=@item.Id.ToString() class="btn" value="" onclick=@("tipCick(\"" + @item.Id.ToString() + "\");")><i class="fa fa-thumbs-up"></i> Tip</button>
+                            }
+                            else
+                            {
+                                <button id=@item.Id.ToString() class="btn" value="" onclick=@("tipCick(\"" + @item.Id.ToString() + "\");") disabled><i class="fa fa-thumbs-up"></i> Tip</button>
+
+                            }
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn"><i class="fa fa-comment"></i> Comment</button>
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn"><i class="fa fa-share-square-o"></i> Share</button>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        }
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+        <div id="rightFooter">rihjt</div>
+    </div>
+</div>
+<script>
+    function tipCick(buttonid) {
+        //alert(buttonid);
+        document.getElementById(buttonid).disabled = true;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "/MediaDetails/Tip?id=" + buttonid, true);
+        xmlhttp.send();
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger;
+        function tipCick(buttonid) {
+            debugger;
+            // alert(buttonid);
+            document.getElementById(buttonid).disabled = true;
+
+        }
+
+    });
+    // $(window).load(function() {
+    // $(window).load(function () {
+    $(window).on('load', function () {
+        // alert("window load occurred!");
+        $.ajax({
+            type: "POST",
+            url: "/MediaDetails/GetAllUsers",
+            success: function (data) {
+
+                var html = "";
+                html += "<ul>";
+                // var dat = $.parseJSON(data);
+                data.forEach(function (item) {
+                    debugger;
+                    //var da =$.parseJSON(item);
+                    html += "<li>" + item.firstName + " " + item.lastName + "</li>";
+                    //alert(item.firstName);
+                });
+                html += "</ul>";
+                $('#rightFooter').html(html);
+                //  alert(data);
+            },
+            error: function () {
+                //alert("Error occured!!")
+            }
+        })
+    });
+</script>
+

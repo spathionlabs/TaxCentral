@@ -1,0 +1,481 @@
+﻿
+@{
+    ViewData["Title"] = "InviteUsers";
+    Layout = "~/Views/Shared/_LayoutTaxProfessional.cshtml";
+}
+
+@*@{
+    ViewBag.Title = "CreateUser";
+    Layout = "~/Views/Shared/_LayoutTaxProfessional.cshtml";
+    /// Layout = "~/Views/Shared/_LayoutAdmin.cshtml";*@
+
+@*<link href="~/Content/Bootsnip.css" rel="stylesheet" />*@
+<style>
+    .error-msg {
+        color: #FF0000;
+    }
+
+    .success-msg {
+        color: #0d074e;
+    }
+</style>
+<!-- Bootstrap core CSS-->
+<link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link href="~/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<!-- Custom styles for this template-->
+<link href="~/assets/css/admin.css" rel="stylesheet">
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>*@
+@*<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>*@
+<!------ Include the above in your HEAD tag ---------->
+
+<div id="content-wrapper">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header text-center">
+                Invite Users
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-3">
+                        <div class="panel panel-login">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    @*<div class="col-xs-2 col-md-2">
+                                            <a href="#" class="active" id="Trader-form-Regulator"><b>Trader</b></a>
+                                        </div>*@
+                                    <div class="col-xs-6 col-md-6">
+                                        <a href="#" class="active" id="TaxProfessional-form-link"><b>TaxProfessional</b></a>
+                                    </div>
+                                    @*<div class="col-xs-2 col-md-2">
+                                            <a href="#" id="investor-form-link"><b>Indvidual Investor</b></a>
+                                        </div>
+                                        <div class="col-xs-2 col-md-2">
+                                            <a href="#" id="institutional-investor-form-link"><b>Institutional Investor</b></a>
+                                        </div>*@
+                                    <div class="col-xs-6 col-md-6">
+                                        <a href="#" id="Regulator-form-link"><b>Regulator</b></a>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        @*<form id="Trader-form" action="Traderemail" method="post" role="form" style="display: block; >
+                                                <div class="form-group col-sm-10 col-sm-offset-2">
+                                                    <input type="email" name="mobile" id="email" tabindex="1" class="form-control" placeholder="Trader Mobile Number" value="" width="12">
+                                                </div>
+
+                                                <input type="submit" name="register-submit" id="register-submit-Trader" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+
+                                            </form>*@
+                                        <form id="TaxProfessional-form" method="post" role="form" style="display: block;">
+
+                                            <div class="form-group col-sm-10 col-sm-offset-2">
+                                                <input type="email" name="email" id="TaxProfessionalEmail" tabindex="1" class="form-control" placeholder="TaxProfessional Mobile Number" value="" width="12">
+                                            </div>
+                                            @*<div class="form-group col-sm-10 col-sm-offset-2">
+                                                    <select id="TaxProfessionalList" class="form-control"><option value="0">--Select Trader--</option></select>
+                                                </div>*@
+                                            <input type="submit" name="register-submit" id="register-submit-TaxProfessional" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+                                            @*<div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-sm-offset-3">
+                                                            <input type="submit" name="register-submit" id="register-submit-TaxProfessional" tabindex="4" class="btn btn-success" value="Send Invite">
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        </form>
+                                        <form id="investor-form" action="investoremail" method="post" role="form" style="display: none;">
+
+                                            <div class="form-group col-sm-10 col-sm-offset-2">
+                                                <input type="number" name="email" id="investoremail" tabindex="1" class="form-control" placeholder="Indvidual Investor Mobile Number" value="" width="12">
+                                            </div>
+                                            <input type="submit" name="register-submit" id="register-submit-investor" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+                                            @*<div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-sm-offset-3">
+                                                            <input type="submit" name="register-submit" id="register-submit-investor" tabindex="4" class="btn btn-success" value="Send Invite">
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        </form>
+                                        <form id="institutional-investor-form" action="institutionalinvestoremail" method="post" role="form" style="display: none;">
+
+                                            <div class="form-group col-sm-10 col-sm-offset-2">
+                                                <input type="number" name="email" id="institutionalinvestoremail" tabindex="1" class="form-control" placeholder="Institutional Investor Mobile Number" value="" width="12">
+                                            </div>
+                                            <input type="submit" name="register-submit" id="register-submit-institutional-investor" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+                                            @*<div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-sm-offset-3">
+                                                            <input type="submit" name="register-submit" id="register-submit-institutional-investor" tabindex="4" class="btn btn-success" value="Send Invite">
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        </form>
+                                        <form id="Regulator-form" action="Regulatoremail" method="post" role="form" style="display: none;">
+
+                                            <div class="form-group col-sm-10 col-sm-offset-2">
+                                                <input type="email" name="email" id="RegulatorMobile" tabindex="1" class="form-control" placeholder="Regulator emial Number" value="" maxlength="100">
+                                            </div>
+                                            <input type="submit" name="register-submit" id="register-submit-Regulator" tabindex="4" class="btn btn-success" value="Send Invite" style="margin-left: 45%">
+                                            @*<div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-sm-offset-3">
+                                                            <input type="submit" name="register-submit" id="register-submit-Regulator" tabindex="4" class="btn btn-success" value="Send Invite">
+                                                         </div>
+                                                    </div>
+                                                </div>*@
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="errMsg" align="center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+
+        $('#TaxProfessional-form-link').click(function (e) {
+            $("#TaxProfessional-form").delay(100).fadeIn(100);
+            // $("#TaxProfessional-form").fadeOut(100);
+
+            $("#investor-form").fadeOut(100);
+            $("#Regulator-form").fadeOut(100);
+            $("#institutional-investor-form").fadeOut(100);
+            $(this).addClass('active');
+            //$.ajax({
+            //    type: "POST",
+            //    contentType: "application/json; charset=utf-8",
+            //    url: "/Loggin/GetAllTraders",
+
+            //    success: function (res) {
+            //        debugger;
+            //        $.each(res, function (data, value) {
+
+            //            $("#TaxProfessionalList").append($("<option></option>").val(value.Id).html(value.Email));
+            //        })
+
+            //    },
+            //    error: function (xhr, err) {
+            //        debugger;
+            //        alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+            //        // alert("responseText: " + xhr.responseText);
+            //    }
+            //});
+
+            //$('#TaxProfessional-form-link').removeClass('active');
+            $('#Regulator-form-link').removeClass('active');
+            $('#investor-form-link').removeClass('active');
+            $('#institutional-investor-form-link').removeClass('active');
+            e.preventDefault();
+        });
+        $('#investor-form-link').click(function (e) {
+            $("#investor-form").delay(100).fadeIn(100);
+            $("#TaxProfessional-form").fadeOut(100);
+
+            $("#institutional-investor-form").fadeOut(100);
+            //$("#investor-form").fadeOut(100);
+            $("#Regulator-form").fadeOut(100);
+            $(this).addClass('active');
+
+            $('#TaxProfessional-form-link').removeClass('active');
+            $('#Regulator-form-link').removeClass('active');
+            $('#investor-form-link').removeClass('active');
+            $('#institutional-investor-form-link').removeClass('active');
+
+            e.preventDefault();
+        });
+
+        $('#Regulator-form-link').click(function (e) {
+            $("#Regulator-form").delay(100).fadeIn(100);
+            $("#TaxProfessional-form").fadeOut(100);
+            $("#Trader-form").fadeOut(100);
+            $("#investor-form").fadeOut(100);
+            $("#institutional-investor-form").fadeOut(100);
+            //  $("#Regulator-form").fadeOut(100);
+            $(this).addClass('active');
+            $('#Trader-form-Regulator').removeClass('active');
+            $('#TaxProfessional-form-link').removeClass('active');
+            //  $('#Regulator-form-link').removeClass('active');
+            $('#investor-form-link').removeClass('active');
+            $('#institutional-investor-form-link').removeClass('active');
+            e.preventDefault();
+        });
+
+        $("#institutional-investor-form-link").click(function (e) {
+
+            $("#institutional-investor-form").delay(100).fadeIn(100);
+            $("#Regulator-form").fadeOut(100);
+            $("#TaxProfessional-form").fadeOut(100);
+
+            $("#investor-form").fadeOut(100);
+            //$("#institutional-investor-form").fadeOut(100);
+            //  $("#Regulator-form").fadeOut(100);
+            $(this).addClass('active');
+
+            $('#TaxProfessional-form-link').removeClass('active');
+            //  $('#Regulator-form-link').removeClass('active');
+            $('#investor-form-link').removeClass('active');
+            //$('#institutional-investor-form-link').removeClass('active');
+            e.preventDefault();
+        });
+
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.noConflict();
+        //$('#mobile').keypress(function () {
+        //    if ($("#mobile").val().length > 11)
+        //        event.preventDefault();
+        //});
+        //$('#TaxProfessionalMobile').keypress(function () {
+        //     if ($("#TaxProfessionalMobile").val().length > 11)
+        //        event.preventDefault();
+        // });
+        //$('#RegulatorMobile').keypress(function () {
+        //     if ($("#RegulatorMobile").val().length > 11)
+        //        event.preventDefault();
+        //});
+        //  $('#Adminusertable').dataTable();
+        // $("#errMsg").html("");
+        //alert("The paragraph was clicked.");
+        $("#register-submit-Trader").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#email").val().length == 0) {
+                message += "*Please Enter Mobile Number *";
+                success = false;
+            }
+            else {
+                var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                if (!pattern.test($("#email").val())) {
+                    message += "*Invalid Email *";
+                    success = false;
+                }
+            }
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+
+            }
+            else {
+                var data = "email=" + $("#email").val() + "&type=0";
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/InviteUser/UserCreation?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                        $("#errMsg").show().delay(10000).fadeOut();
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+        $("#register-submit-Regulator").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#RegulatorMobile").val().length == 0) {
+                message += "*Please Enter Mobile Number *";
+                success = false;
+            }
+            else {
+                var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                if (!pattern.test($("#RegulatorMobile").val())) {
+                    message += "*Invalid Email *";
+                    success = false;
+                }
+            }
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "email=" + $("#RegulatorMobile").val() + "&type=2";
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/InviteUser/UserCreation?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                        $("#errMsg").show().delay(10000).fadeOut();
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+        $("#register-submit-TaxProfessional").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            //if ($('#TaxProfessionalList :selected').val() == "0") {
+            //    message += "*Please Select Trader *";
+            //    success = false;
+            //}
+            if ($("#TaxProfessionalEmail").val().length == 0) {
+                message += "*Please Enter Mobile Number *";
+                success = false;
+            }
+            else {
+                var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                if (!pattern.test($("#TaxProfessionalEmail").val())) {
+                    message += "*Invalid Email *";
+                    success = false;
+                }
+            }
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "email=" + $("#TaxProfessionalEmail").val() + "&type=1";
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/InviteUser/UserCreation?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                        $("#errMsg").show().delay(10000).fadeOut();
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+
+
+        $("#register-submit-investor").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#investoremail").val().length == 0) {
+                message += "*Please Enter Mobile Number *";
+                success = false;
+            }
+            else {
+                //var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                //if (!pattern.test($("#investoremail").val())) {
+                //    message += "*Invalid Email *";
+                //    success = false;
+                //}
+            }
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "mobile=" + $("#investoremail").val();
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/Loggin/investoremail?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+
+        $("#register-submit-institutional-investor").click(function (e) {
+            // alert("The paragraph was clicked.");
+            debugger;
+            var message = "";
+            var success = true;
+            $("#errMsg").html(message);
+            if ($("#institutionalinvestoremail").val().length == 0) {
+                message += "*Please Enter Mobile Number *";
+                success = false;
+            }
+            else {
+                //var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                //if (!pattern.test($("#institutionalinvestoremail").val())) {
+                //    message += "*Invalid Email *";
+                //    success = false;
+                //}
+            }
+            e.preventDefault();
+            if (!success) {
+                $("#errMsg").html(message).addClass("error-msg");
+                $("#errMsg").show().delay(10000).fadeOut();
+
+            }
+            else {
+                var data = "mobile=" + $("#institutionalinvestoremail").val();
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/Loggin/InstitutionalInvestorEmail?" + data,
+                    success: function (data) {
+                        $("#errMsg").html(data).addClass("success-msg");
+                    },
+                    error: function (xhr, err) {
+                        // alert("readyState: " + xhr.readyState + "\nstatus: " + xhr.status);
+                        //  alert("responseText: " + xhr.responseText);
+                    }
+                })
+            }
+        });
+    });
+
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,332 @@
+﻿@model IEnumerable<Main.Mvc.Models.MailInvoice.MailInvoice>
+
+@{
+    ViewBag.Title = "Trader";
+    Layout = "~/Views/Shared/_LayoutProceedPay.cshtml";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Spathion</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="~/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="~/assets/css/admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/jquery.dataTables.min.css">
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    @*<script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    @*<script src="~/assets/js/admin.min.js"></script>*@
+    <script src="~/assets/js/jquery.dataTables.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header text-center">
+                    Invoice Factoring Dashboard
+                    @*<a class="btn btn-sm btn-secondary float-right mr-1 d-print-none" href="#" onclick="javascript:window.print();">
+                            <i class="fa fa-print"></i> Print
+                        </a>*@
+                </div>
+
+                <div class="card-body">
+
+
+                    <div class="table-responsive-sm">
+                        <table id="Adminusertable" class="table table-bordered table-striped">
+
+
+
+
+                            <tr>
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Name Of Sender
+                                </th>
+                                @*<th>
+                                        Name Of Receiver
+                                    </th>*@
+                                <th>
+                                    Amount
+                                </th>
+                                <th>
+                                    GstId Sender
+                                </th>
+                                @*<th>
+                                        GstId Receiver
+                                    </th>*@
+                                @*<th>
+                                        To  Email
+                                    </th>
+                                    <th>
+                                        From  Email
+                                    </th>
+                                    <th>
+                                        Guid
+                                    </th>*@
+
+                                <th>
+                                    Resp Receiver
+                                </th>
+                                <th>
+                                    Resp Tax Professional
+                                </th>
+                                <th>
+                                    Response from Tax DataBase
+                                </th>
+                                <th>Response IRP</th>
+                                <th>Details</th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <td>
+                                @item.invoiceJSON.billLists[0].transDocDate
+                            </td>
+                            <td>
+                                @item.invoiceJSON.billLists[0].fromTrdName
+                            </td>
+                            @*<td>
+            @item.invoiceJSON.billLists[0].toTrdName
+        </td>*@
+                            <td>
+                                @item.invoiceJSON.billLists[0].totInvValue
+                            </td>
+                            <td>
+                                @item.invoiceJSON.billLists[0].fromGstin
+                            </td>
+                            @*<td>
+            @item.invoiceJSON.billLists[0].toGstin
+        </td>*@
+                            @*<td>
+            @item.ToEmail
+        </td>
+        <td>
+            @item.FromEmail
+        </td>
+        <td>
+            @item.Id
+        </td>*@
+
+                            <td>
+                                @if ((int)@item.InvoiceStatus == 2)
+                                {
+                                    <p>Rejected</p>
+
+                                }
+                                @if ((int)@item.InvoiceStatus == 1)
+                                {
+                                    <p>Accepted</p>
+                                }
+                                @if ((int)@item.InvoiceStatus == 0)
+                                {
+                                    <p>Created</p>
+                                }
+                            </td>
+                            <td>
+                                @if ((int)@item.taxpractitionerstatus == 2)
+                                {
+                                    <p>Rejected</p>
+
+                                }
+                                @if ((int)@item.taxpractitionerstatus == 1)
+                                {
+                                    <p>Validated</p>
+                                }
+                                @if ((int)@item.taxpractitionerstatus == 0)
+
+                                {
+                                    <p>None</p>
+                                }
+                            </td>
+                            <td>
+                                @*@item.TaxPractioner*@
+                                <p>No Response</p>
+
+                            </td>
+                            <td><p>Response IRP</p></td>
+
+                            <td>
+                                <a data-toggle="modal" data-id=@item.Id title="Add this item" class="open-AddBookDialog" href="#addBookDialog">Detail</a>
+                                <a href=@(item.HashUrl) target="_blank">View File</a>
+
+                            </td>
+                        </tr>
+
+                            }
+                        </table>
+                        <div id="addBookDialog" class="modal fade" role="dialog">
+                            <div class="modal-dialog" style="width:1250px;">
+
+                                <!-- Modal content-->
+                                <div class="modal-content" style="width:900px">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Invoice Detail</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="table">
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="addBookDialog1" class="modal fade" role="dialog">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal">×</button>
+                                <h3>Modal header</h3>
+                            </div>
+                            <div class="modal-body">
+                                <table id="table1">
+                                    <tr>
+                                        <td>
+                                            From
+                                        </td>
+                                        <td>
+                                            From GST
+                                        </td>
+                                        <td>
+                                            To
+                                        </td>
+                                        <td>
+                                            TO GST
+                                        </td>
+                                        <td>Total Value</td>
+                                        <td>CGST Value</td>
+                                        <td>SGST Value</td>
+                                        <td>IGST Value</td>
+                                        <td>Total Invoice Value</td>
+                                    </tr>
+                                </table>
+                                <input type="text" name="bookId" id="bookId" value="" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script language="javascript" type="text/javascript">
+    $(document).on("click", ".open-AddBookDialog", function () {
+        var invoiceID = $(this).data('id');
+        //debugger;
+        var url = "/ViewInvoice/GetMailInvoice?id=" + invoiceID;
+        // $(".modal-body #bookId").val(myBookId);
+        var html = "<table>";
+        $.ajaxSetup({ async: false });
+
+        $.ajax({
+            url: url,
+            async: "false",
+            success: function (result) {
+
+                debugger;
+                console.log(result);
+                //$("#div1").html(result);
+                html += "<tr><td>From</td><td>From GST</td><td>To</td><td>TO GST</td><td>Total Value</td><td>CGST Value</td><td>SGST Value</td><td>IGST Value</td><td>Total Invoice Value</td></tr>";
+                html += "<tr><td>";
+                html += result.invoiceJSON.billLists[0].fromTrdName;
+                html += "</td>";
+                html += "<td>";
+
+                html += result.invoiceJSON.billLists[0].fromGstin;
+                html += "</td><td>";
+                html += result.invoiceJSON.billLists[0].toTrdName;
+                html += "</td><td>";
+                html += result.invoiceJSON.billLists[0].toGstin;
+                html += "</td><td>";
+
+                html += result.invoiceJSON.billLists[0].totalValue;
+                html += "</td><td>";
+                html += result.invoiceJSON.billLists[0].cgstValue;
+                html += "</td><td>";
+                html += result.invoiceJSON.billLists[0].sgstValue;
+                html += "</td><td>";
+                html += result.invoiceJSON.billLists[0].igstValue;
+                html += "</td><td>";
+                html += result.invoiceJSON.billLists[0].totInvValue;
+                html += "</td><td>";
+                html += "</td><tr>";
+
+                html += "</table><br/><br/>";
+                html += "<table><tr><td>Item No</td><td>Product Name</td><td>Quantity</td><td>Taxable Amount</td></tr>";
+                //foreach (int k = 0; k < item.invoiceJSON.billLists[j].itemList.Length; k++)
+                for (i = 0; i < result.invoiceJSON.billLists[0].itemList.length; i++) {
+                    html += "<tr><td>";
+                    html += result.invoiceJSON.billLists[0].itemList[i].itemNo;
+                    html += "</td><td>";
+                    html += result.invoiceJSON.billLists[0].itemList[i].productName;
+
+                    html += "</td><td>";
+                    html += result.invoiceJSON.billLists[0].itemList[i].quantity;
+                    //html += "</td><td>";
+                    // html += result.invoiceJSON.billLists[0].itemList[i].qtyUnit;
+                    html += "</td><td>";
+                    html += result.invoiceJSON.billLists[0].itemList[i].taxableAmount;
+                    html += "</td></tr>";
+                }
+                html += "</table >";
+                $(".modal-body #table").append(html);
+                $('#table').html(html);
+            }
+
+        });
+
+        // $(".modal-body #table").append(html);
+        // As pointed out in comments,
+        // it is unnecessary to have to manually call the modal.
+        // $('#addBookDialog').modal('show');
+    });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function
+        () {
+        $.noConflict();
+        $('#Adminusertable').dataTable({
+            "order": []
+        });
+    });
+</script>
+
+
